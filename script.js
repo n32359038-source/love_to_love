@@ -5,12 +5,12 @@ const CONFIG = {
   myEmail: "n32359038@gmail.com",      // ← 你的 Email（對方的回答會寄到這裡）
   web3formsKey: "0a6e83a2-a1d0-4226-8e45-f03f13edd884",   // ← 到 web3forms.com 用上面的 Email 免費申請，貼在這裡
   myNick:  "大笨蛋",               // ← 你在問題裡的自稱
-  defaultTo: "謝宛庭",               // ← 對方的名字（寫在這裡，網址就不用帶名字）
+  defaultTo: "",               // ← 對方的名字（寫在這裡，網址就不用帶名字）
 
   scenarios: {
     apology: {
       label: "道歉", emoji: "🙇", anim: "1f62d", desc: "惹對方生氣時",
-      question: "可以原諒我這個{me}嗎？\n本來要偷偷給你驚喜的",
+      question: "",
       yes: "原諒你 💗",
       noTexts: ["不要","哼！","還在生氣","再想想…","不原諒啦","好啦…再按一次"],
       teases: ["拜託拜託 🥺","我知道錯了啦","我真的會改的！","你忍心嗎…","看看那個大按鈕 👀"],
