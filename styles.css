@@ -1,0 +1,330 @@
+/* 顏色和樣式：改 :root 裡的色碼就能換整個網站的配色 */
+:root {
+  --pink: #ff6b9d;
+  --pink-dark: #e94f84;
+  --pink-light: #ffd6e5;
+  --bg1: #ffe4ec;
+  --bg2: #fff6f9;
+  --text: #5a2a3a;
+  --card: #ffffff;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+html,
+body {
+  min-height: 100%;
+}
+body {
+  font-family: "Noto Sans TC", sans-serif;
+  color: var(--text);
+  background: linear-gradient(180deg, var(--bg1), var(--bg2)) fixed;
+  overflow-x: hidden;
+}
+.fun {
+  font-family: "ZCOOL KuaiLe", "Noto Sans TC", sans-serif;
+}
+#hearts {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.float-heart {
+  position: absolute;
+  bottom: -40px;
+  animation: floatUp linear forwards;
+  opacity: 0.6;
+}
+@keyframes floatUp {
+  to {
+    transform: translateY(-110vh) rotate(30deg);
+    opacity: 0;
+  }
+}
+
+.wrap {
+  position: relative;
+  z-index: 1;
+  max-width: 460px;
+  margin: 0 auto;
+  min-height: 100vh;
+  padding: 28px 18px 40px;
+  display: flex;
+  flex-direction: column;
+}
+.center {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.hidden {
+  display: none !important;
+}
+
+.btn {
+  border: none;
+  border-radius: 999px;
+  padding: 14px 30px;
+  font-size: 18px;
+  font-weight: 700;
+  background: var(--pink);
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(255, 107, 157, 0.35);
+  font-family: inherit;
+  cursor: pointer;
+  transition: transform 0.25s, padding 0.25s, font-size 0.25s;
+}
+.btn:active {
+  filter: brightness(0.95);
+}
+.btn.ghost {
+  background: #fff;
+  color: var(--pink);
+}
+.btn.block {
+  width: 100%;
+}
+.btn:disabled {
+  opacity: 0.45;
+}
+
+/* ===== 使用端 ===== */
+.hello {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.hello h1 {
+  font-size: 28px;
+}
+.hello p {
+  opacity: 0.7;
+  margin-top: 6px;
+  font-size: 14px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.mode {
+  background: var(--card);
+  border-radius: 18px;
+  padding: 18px 10px;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(255, 107, 157, 0.15);
+  border: 2px solid transparent;
+  transition: 0.2s;
+}
+.mode .e {
+  font-size: 38px;
+}
+.mode b {
+  display: block;
+  margin-top: 6px;
+  font-size: 16px;
+}
+.mode small {
+  display: block;
+  opacity: 0.6;
+  font-size: 12px;
+  margin-top: 2px;
+}
+.mode.sel {
+  border-color: var(--pink);
+  transform: translateY(-2px);
+}
+.panel {
+  background: var(--card);
+  border-radius: 18px;
+  padding: 18px;
+  margin-top: 18px;
+  box-shadow: 0 6px 16px rgba(255, 107, 157, 0.15);
+}
+label {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  margin: 12px 0 6px;
+}
+input,
+textarea,
+select {
+  width: 100%;
+  border: 2px solid var(--pink-light);
+  border-radius: 12px;
+  padding: 12px;
+  font-size: 16px;
+  font-family: inherit;
+  color: var(--text);
+  background: #fff;
+  outline: none;
+}
+input:focus,
+textarea:focus {
+  border-color: var(--pink);
+}
+.linkbox {
+  word-break: break-all;
+  background: var(--bg2);
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 13px;
+  margin: 12px 0;
+}
+.row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.row .btn {
+  flex: 1;
+  padding: 12px 10px;
+  font-size: 15px;
+}
+.line {
+  background: #06c755;
+}
+
+/* ===== 收到端 ===== */
+.to {
+  font-size: 15px;
+  opacity: 0.75;
+  margin-bottom: 6px;
+}
+.big-emoji {
+  font-size: 84px;
+  animation: beat 1.2s infinite;
+}
+@keyframes beat {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  15% {
+    transform: scale(1.15);
+  }
+  30% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(1.1);
+  }
+}
+.question {
+  font-size: 34px;
+  font-weight: 900;
+  line-height: 1.4;
+  margin: 18px 0 34px;
+}
+.yn {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  min-height: 120px;
+}
+.tease {
+  margin-top: 22px;
+  font-size: 15px;
+  min-height: 22px;
+  color: var(--pink-dark);
+}
+
+.step-title {
+  font-size: 24px;
+  font-weight: 900;
+  margin: 10px 0 20px;
+  text-align: center;
+}
+.opts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.opt {
+  background: #fff;
+  border: 2px solid var(--pink-light);
+  border-radius: 16px;
+  padding: 14px 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.15s;
+  user-select: none;
+}
+.opt .e {
+  font-size: 30px;
+}
+.opt div:last-child {
+  font-size: 15px;
+  margin-top: 4px;
+}
+.opt.sel {
+  border-color: var(--pink);
+  background: var(--pink-light);
+  transform: scale(1.03);
+}
+.hint {
+  text-align: center;
+  font-size: 13px;
+  opacity: 0.6;
+  margin: -10px 0 14px;
+}
+
+.card-big {
+  background: #fff;
+  border-radius: 20px;
+  padding: 30px 20px;
+  font-size: 22px;
+  line-height: 1.6;
+  text-align: center;
+  box-shadow: 0 8px 22px rgba(255, 107, 157, 0.2);
+  margin-bottom: 18px;
+  min-height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pop 0.35s;
+}
+@keyframes pop {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+}
+.slider-val {
+  text-align: center;
+  font-size: 44px;
+  font-weight: 900;
+  color: var(--pink);
+  margin: 10px 0;
+}
+input[type="range"] {
+  border: none;
+  padding: 0;
+  accent-color: var(--pink);
+  height: 30px;
+}
+.slider-label {
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 24px;
+  min-height: 26px;
+}
+.summary {
+  background: #fff;
+  border-radius: 16px;
+  padding: 16px;
+  text-align: left;
+  margin: 18px 0;
+  font-size: 15px;
+  line-height: 1.8;
+  width: 100%;
+}

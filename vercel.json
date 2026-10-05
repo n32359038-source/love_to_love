@@ -1,0 +1,3 @@
+{
+  "rewrites": [{ "source": "/:mode", "destination": "/index.html" }]
+}

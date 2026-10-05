@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <title>給你的小訊息 💌</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&family=ZCOOL+KuaiLe&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div id="hearts"></div>
+
+    <!-- ================= 使用端（你） ================= -->
+    <div id="sender" class="wrap hidden">
+      <div class="hello">
+        <div style="font-size: 46px">💌</div>
+        <h1 class="fun">今天想傳什麼給他？</h1>
+        <p>選一個情境 → 填名字 → 產生連結傳給對方</p>
+      </div>
+
+      <div class="grid" id="modeGrid"></div>
+
+      <div class="panel hidden" id="formPanel">
+        <div style="font-size: 18px; font-weight: 900" id="formTitle"></div>
+        <label>對方的名字（會顯示在畫面上）</label>
+        <input id="toName" placeholder="例如：寶貝、小豬" maxlength="20" />
+        <label>大標題問題（可以自己改）</label>
+        <textarea id="customQ" rows="2" maxlength="60"></textarea>
+        <button class="btn block" style="margin-top: 16px" onclick="makeLink()">
+          產生專屬連結 ✨
+        </button>
+
+        <div id="linkResult" class="hidden">
+          <div class="linkbox" id="linkText"></div>
+          <p
+            id="longHint"
+            class="hidden"
+            style="font-size: 12px; opacity: 0.7; margin: -4px 0 10px"
+          >
+            💡 有自訂問題網址會變長。常用的話可以直接改 script.js 裡的
+            question，網址就會很短。
+          </p>
+          <div class="row">
+            <button class="btn" onclick="copyLink()" id="copyBtn">
+              📋 複製
+            </button>
+            <button class="btn line" onclick="shareLine()">LINE 分享</button>
+            <button
+              class="btn ghost"
+              onclick="window.open(currentLink,'_blank')"
+            >
+              👀 預覽
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= 收到端（對方） ================= -->
+    <div id="receiver" class="wrap center hidden">
+      <!-- 問題頁 -->
+      <div id="askPage" style="width: 100%">
+        <div class="to" id="toLine"></div>
+        <div class="big-emoji" id="askEmoji"></div>
+        <div class="question fun" id="askText"></div>
+        <div class="yn">
+          <button class="btn" id="yesBtn"></button>
+          <button class="btn ghost" id="noBtn"></button>
+        </div>
+        <div class="tease" id="tease"></div>
+      </div>
+
+      <!-- 步驟頁（動態產生） -->
+      <div id="stepPage" class="hidden" style="width: 100%"></div>
+
+      <!-- 完成頁 -->
+      <div id="donePage" class="hidden" style="width: 100%">
+        <div class="big-emoji" id="doneEmoji"></div>
+        <h1
+          class="fun"
+          style="font-size: 30px; margin-top: 10px"
+          id="doneTitle"
+        ></h1>
+        <p
+          style="margin-top: 10px; font-size: 17px; line-height: 1.7"
+          id="doneText"
+        ></p>
+        <div class="summary" id="summary"></div>
+        <p style="font-size: 13px; opacity: 0.6" id="sendStatus"></p>
+      </div>
+    </div>
+
+    <script src="/script.js"></script>
+  </body>
+</html>

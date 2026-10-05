@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>動態表情挑選表</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --pink: #ff6b9d;
+        --pink-light: #ffd6e5;
+        --bg: #fff4f7;
+        --text: #5a2a3a;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Noto Sans TC", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        padding: 24px 16px 60px;
+      }
+      .wrap {
+        max-width: 900px;
+        margin: 0 auto;
+      }
+      h1 {
+        font-size: 26px;
+        font-weight: 900;
+      }
+      .lead {
+        margin: 8px 0 26px;
+        line-height: 1.7;
+        opacity: 0.85;
+      }
+      .lead code {
+        background: #fff;
+        padding: 2px 6px;
+        border-radius: 6px;
+        color: var(--pink);
+        font-weight: 700;
+      }
+      h2 {
+        font-size: 18px;
+        margin: 26px 0 12px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 12px;
+      }
+      .tile {
+        background: #fff;
+        border: 2px solid transparent;
+        border-radius: 16px;
+        padding: 12px 8px;
+        text-align: center;
+        cursor: pointer;
+        transition: 0.15s;
+      }
+      .tile:hover {
+        border-color: var(--pink-light);
+        transform: translateY(-2px);
+      }
+      .tile img {
+        width: 72px;
+        height: 72px;
+      }
+      .tile b {
+        display: block;
+        font-size: 14px;
+        margin-top: 6px;
+      }
+      .tile code {
+        display: inline-block;
+        margin-top: 4px;
+        font-size: 13px;
+        color: var(--pink);
+        font-weight: 700;
+      }
+      .tag {
+        display: block;
+        margin-top: 4px;
+        font-size: 11px;
+        background: var(--pink-light);
+        border-radius: 999px;
+        padding: 2px 6px;
+      }
+      .toast {
+        position: fixed;
+        left: 50%;
+        bottom: 24px;
+        transform: translateX(-50%);
+        background: var(--text);
+        color: #fff;
+        padding: 10px 18px;
+        border-radius: 999px;
+        font-size: 14px;
+        opacity: 0;
+        transition: 0.25s;
+        pointer-events: none;
+      }
+      .toast.show {
+        opacity: 1;
+      }
+      .credit {
+        margin-top: 36px;
+        font-size: 12px;
+        opacity: 0.6;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <h1>動態表情挑選表 ✨</h1>
+      <p class="lead">
+        點一下就會複製代碼。到 <code>script.js</code> 把想換的情境的
+        <code>anim: "代碼"</code> 改掉就好。<br />
+        粉紅標籤＝目前網站預設用在哪裡。
+      </p>
+      <div id="list"></div>
+      <p class="credit">動畫來源：Google Noto Animated Emoji（CC BY 4.0）</p>
+    </div>
+    <div class="toast" id="toast"></div>
+
+    <script>
+      const groups = [
+        [
+          "哭哭・拜託（適合道歉、撒嬌）",
+          [
+            ["1f97a", "拜託臉", "撒嬌 問題"],
+            ["1f62d", "大哭", "道歉 問題"],
+            ["1f622", "掉眼淚"],
+            ["1f979", "忍住眼淚", "道歉 完成"],
+            ["1f62b", "好累"],
+            ["1f63f", "哭哭貓"],
+            ["1f648", "不敢看猴"],
+          ],
+        ],
+        [
+          "害羞・喜歡（適合約會、誇獎）",
+          [
+            ["1f970", "愛心臉", "撒嬌 完成"],
+            ["1f60d", "愛心眼", "誇獎 問題・約會 完成"],
+            ["1f633", "臉紅"],
+            ["1f618", "飛吻"],
+            ["1f61a", "親親"],
+            ["1f63b", "愛心眼貓"],
+            ["1f924", "流口水"],
+          ],
+        ],
+        [
+          "開心・溫暖",
+          [
+            ["1f60a", "微笑", "誇獎 完成"],
+            ["1f60c", "安心"],
+            ["1f601", "露齒笑"],
+            ["1f923", "笑到打滾"],
+            ["1f917", "抱抱", "打氣 完成"],
+          ],
+        ],
+        [
+          "愛心",
+          [
+            ["2764_fe0f", "紅心"],
+            ["1f496", "閃亮愛心"],
+            ["1f497", "變大愛心", "和好 完成"],
+            ["1f498", "邱比特之箭", "約會 問題"],
+            ["1f49e", "旋轉愛心", "想念 完成"],
+            ["1f495", "兩顆心", "想念 問題"],
+            ["1f494", "心碎", "和好 問題"],
+            ["1f48c", "情書"],
+          ],
+        ],
+        [
+          "派對・加油",
+          [
+            ["1f389", "拉炮", "生日 問題"],
+            ["1f973", "派對臉", "生日 完成"],
+            ["1f4aa", "加油", "打氣 問題"],
+            ["2728", "閃閃發亮"],
+            ["1f525", "火熱"],
+          ],
+        ],
+      ];
+      const url = (c) =>
+        `https://fonts.gstatic.com/s/e/notoemoji/latest/${c}/512.webp`;
+      document.getElementById("list").innerHTML = groups
+        .map(
+          ([title, items]) => `
+  <h2>${title}</h2>
+  <div class="grid">${items
+    .map(
+      ([c, n, tag]) => `
+    <div class="tile" data-c="${c}">
+      <img src="${url(c)}" alt="${n}" loading="lazy">
+      <b>${n}</b><code>${c}</code>${
+        tag ? `<span class="tag">${tag}</span>` : ""
+      }
+    </div>`
+    )
+    .join("")}
+  </div>`
+        )
+        .join("");
+
+      const toast = document.getElementById("toast");
+      document.querySelectorAll(".tile").forEach(
+        (t) =>
+          (t.onclick = () => {
+            const c = t.dataset.c;
+            const done = () => {
+              toast.textContent = `已複製：${c}`;
+              toast.classList.add("show");
+              setTimeout(() => toast.classList.remove("show"), 1400);
+            };
+            navigator.clipboard
+              ?.writeText(c)
+              .then(done)
+              .catch(() => {
+                toast.textContent = `代碼：${c}`;
+                toast.classList.add("show");
+                setTimeout(() => toast.classList.remove("show"), 2000);
+              });
+          })
+      );
+    </script>
+  </body>
+</html>
